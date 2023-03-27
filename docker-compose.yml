@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  apache:
+    build: ./config
+    depends_on:
+      - database
+    ports:
+      - "3001:80"
+      - "443:443"
+    volumes:
+      - ./srcs:/var/www/html/
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_DATABASE=camagru_database
+      - MYSQL_USER=sconcy
+      - MYSQL_PASSWORD=password
+    networks:
+      - camagru-network
+
+  myphpadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - camagru-network
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: database
+      MYSQL_USER: sconcy
+      MYSQL_PASSWORD: password
+
+  database:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=camagru_database
+      - MYSQL_USER=sconcy
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=root_password
+    networks:
+      - camagru-network
+    ports:
+      - "3306:3306"
+
+networks:
+  camagru-network:
+    driver: bridge
