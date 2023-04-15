@@ -12,7 +12,6 @@
 
         public function __construct($receiver, $username) {
             $this->_mail = new PHPMailer(true);
-            $this->_mail->SMTPDebug = 1;
 			$this->_mail->isSMTP();
             $this->_mail->isHTML(true);
 			$this->_mail->Host = 'smtp.gmail.com';
@@ -25,7 +24,7 @@
             $this->_mail->addAddress($receiver, $username);
         }
 
-        public function sendSignUpEmail() {
+        public function sendSignUpEmail($challengeId) {
             $this->_mail->Subject = "Verify your email";
             $this->_mail->Body =
             "
@@ -33,17 +32,21 @@
                 <head>
                     <title>Welcome to Camagru !</title>
                 </head>
-                <body style='font-family: Arial, sans-serif; font-size: 14px;'>
+                <body style='
+                font-family: 'Designer', sans-serif;
+                font-size: 14px;
+                background-color: rgb(0, 0, 0);
+                '>
                     <h1>Hi there !</h1>
                     <br>
-                    <p>Welcome to Camagru, there is a next step to validate your account.</p>
+                    <p>Welcome to Camagru ! Here is the final step to validate your account.</p>
                     <br>
-                    <p>Here is a link to validate it: </p>
+                    <p>You can valide your account by clicking this <a href='http://localhost:3001/verify/".$challengeId."'>LINK</a></p>
                     <br>
                     <p>Thank you for joining Camagru!</p>
                 </body>
             </html>
             ";
-            $this->_mail->Send();
+            $this->_mail->send();
         }
     }

@@ -1,7 +1,7 @@
 <?php
 require_once ('models/userModel.php');
 
-class Home {
+class Profile {
     private $_username;
     private $_password;
 
@@ -11,8 +11,7 @@ class Home {
             require_once('views/index.php');
         }
         else {
-            $_SESSION['msg'] = 'Welcome '.$_SESSION['username'];
-            require_once('views/home.php');
+            require_once('views/profile.php');
         }
     }
 }

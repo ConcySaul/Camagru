@@ -1,0 +1,40 @@
+nav {
+    height: 100px;
+    background-color: #160821;
+  }
+  
+  #nav-list {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+    position: relative;
+    padding-top: 35px;
+  }
+  
+  .nav-li {
+    margin: 0 auto;
+    display: inline-block;
+    list-style: none;
+    padding:0;
+    padding-right: 20px;
+  }
+  
+  .nav-li a {
+    font-family: navFont;
+    text-decoration: none;
+    color: #F7669D;
+    transition: opacity 0.5s ease;
+  }
+  .nav-li a:hover {
+    opacity: 0.7; /* reduce opacity on hover */
+  }
+
+  #logout {
+    float: right;
+   }
+   
+   #profile {
+     float: left;
+   }

@@ -19,6 +19,10 @@ class Login {
             $_SESSION['msg'] = 'No such user';
             header('Location: /Index');
         }
+        else if (!$user->checkActive()){
+            $_SESSION['msg'] = 'you have not validated your account';
+            header('Location: /Index');
+        }
         else {
             $user->login();
             header('Location: /Home');

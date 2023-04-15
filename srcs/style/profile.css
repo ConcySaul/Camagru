@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'navFont';
+    src: url('Designer.otf');
+}
+  
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url('sunset.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#main-container {
+    position: relative;
+    width: 100%;
+    background-color: #160821;
+    margin-top: 300px;
+    display: inline-block;
+}
+
+#form-div {
+    margin-top: 50px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#profilePicture {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-color: #160821;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+#addButton {
+    margin: 20px;
+    background-color: #F68BC6;
+    border-color: #F68BC6;
+    transition: border-color 0.5s ease;
+    font-family: 'navFont', sans-serif;
+    margin-left: 49%;
+    margin-right: 51%;
+}
+
+.input {
+    margin: 10px;
+    width: 90%;
+    background-color: #F68BC6;
+    border-color: #F68BC6;
+    transition: border-color 0.5s ease;
+    font-family: 'navFont', sans-serif;
+    text-align: center;
+}
+
+.input:focus,
+.input:hover{
+  border-color: #361B4E;
+  outline: none;
+}
+
+#picture-div {
+    height: 400px;
+    width: 600px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+    cursor: pointer;
+}
+
+label {
+    font-family: 'navFont', sans-serif;
+    color:#F68BC6;
+    background-color: #6b1177;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 48.5%;
+    margin-right: 51.5%;
+    margin-top: 20px;
+}
+
+label:hover {
+    background-color: #361B4E;
+}

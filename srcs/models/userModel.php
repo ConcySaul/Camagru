@@ -7,6 +7,7 @@ class User {
     private $_username;
     private $_email;
     private $_password;
+    private $_challengeId;
 
     public function __construct() {
         $arguments = func_get_args();
@@ -35,7 +36,7 @@ class User {
     }
 
     public function __construct3($id) {
-        $user->getUserId($id);
+        $this->getUserId($id);
         $this->_password = $user['pass'];
         $this->_username = $user['username'];
     }
@@ -60,9 +61,9 @@ class User {
 
     public function signup(){
         $_db = new Database();
-        $_db->createUser($this->_username, $this->_email, $this->_password);
+        $challengeId = $_db->createUser($this->_username, $this->_email, $this->_password);
         $mail = new Mail($this->_email, $this->_username);
-        $mail->sendSignUpEmail();
+        $mail->sendSignUpEmail($challengeId);
     }
 
     public function login(){
@@ -70,6 +71,7 @@ class User {
         $this->getUserId();
         $_SESSION['user_id'] = $this->_id;
         $_SESSION['username'] = $this->_username;
+        $_SESSION['email'] = $this->_email;
     }
 
     public function checkPassword(){
@@ -81,14 +83,34 @@ class User {
         return false;
     }
 
+    public function checkActive(){
+        $_db = new Database();
+        $user = $_db->getUserByUsername($this->_username);
+        if ($user['active'] == 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function getUserId() {
         $_db = new Database();
         $user = $_db->getUserByUsername($this->_username);
         $this->_id = $user['id'];
+        $this->_email = $user['email'];
     }
 
-    public function returnId(){
+    public function returnId() {
         return $this->_id;
+    }
+
+    public function modifyUser($username, $email, $id) {
+        $_db = new Database();
+        if ($email) {
+            $_db->changeEmail($id, $email);
+        }
+        if ($username) {
+            $_db->changeUsername($id, $username);
+        }
     }
     // public function printInfo(){
     //     echo($this->_username);
