@@ -7,8 +7,10 @@ RUN apt-get update && \
     apt-get install -y openssl libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN chown -R www-data:www-data /var/www/html/public
-RUN chmod -R 777 /var/www/html/public
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html
+
+RUN a2enmod rewrite
 
 RUN openssl req -new -newkey rsa:2048 -nodes -keyout /etc/ssl/private/apache-selfsigned.key -x509 -days 365 -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=localhost"
 

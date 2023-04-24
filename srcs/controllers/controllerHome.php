@@ -1,9 +1,9 @@
 <?php
 require_once ('models/userModel.php');
+require_once ('models/pictureModel.php');
 
 class Home {
     private $_username;
-    private $_password;
 
     public function __construct($url) {
         if (!isset($_SESSION['user_id'])) {
@@ -12,6 +12,10 @@ class Home {
         }
         else {
             $_SESSION['msg'] = 'Welcome '.$_SESSION['username'];
+            $pic = new Picture();
+            
+            $pictures = $pic->getPictures();
+            // var_dump($pictures);
             require_once('views/home.php');
         }
     }
