@@ -1,14 +1,13 @@
 <?php
 require_once ('models/userModel.php');
 
-class ModifyUser {
+class PostPicture {
     private $_username;
     private $_email;
     private $_pdo;
 
     public function __construct($image) {
         $this->_pdo = $this->connectDb(); 
-        echo($image['tmp_name']);
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['msg'] = 'You are not connected';
             require_once('views/index.php');
@@ -23,9 +22,9 @@ class ModifyUser {
                 ));
                 return; 
             }
-            $query = $this->_pdo->prepare("INSERT into pictures (user_id, path) VALUES (:user_id, :path)");
+            $query = $this->_pdo->prepare("INSERT into pictures (user_id, directory) VALUES (:user_id, :directory)");
             $query->bindParam(":user_id", $_SESSION['user_id']);
-            $query->bindParam(":path", $targetFile);
+            $query->bindParam(":directory", $targetFile);
             if ($query->execute()) {
                 http_response_code(201);
                 echo json_encode(array(

@@ -35,7 +35,7 @@ class Router
                 else if ($_SERVER['REQUEST_URI'] === '/postPicture'){
                     require_once ('controllers/controllerPostPicture.php');
                     $image = $_FILES['image'];
-                    $this->_controller = new ModifyUser($image);
+                    $this->_controller = new PostPicture($image);
                 }
             }
             //if the request is a GET

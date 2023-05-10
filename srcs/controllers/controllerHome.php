@@ -15,7 +15,6 @@ class Home {
             $pic = new Picture();
             
             $pictures = $pic->getPictures();
-            // var_dump($pictures);
             require_once('views/home.php');
         }
     }

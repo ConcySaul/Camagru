@@ -37,7 +37,7 @@ class Database {
         $this->_pdo->query("CREATE TABLE IF NOT EXISTS pictures (
             `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_id` INT NOT NULL,
-            `path` VARCHAR(32) NOT NULL,
+            `directory` VARCHAR(32) NOT NULL,
             `caption` VARCHAR(250),
             `like` INT NOT NULL DEFAULT 0,
             `comment` INT NOT NULL DEFAULT 0
