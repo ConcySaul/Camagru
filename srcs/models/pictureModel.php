@@ -22,8 +22,19 @@ class Picture {
         }
     }
 
-    public function getPictures() {
+    public function getAllPictures() {
         $query = $this->_pdo->prepare("SELECT * FROM pictures");
+        $query->execute();
+        $this->_pictures = $query->fetchAll();
+        return $this->_pictures;
+    }
+
+    public function getPictures($offset) {
+        $limit = 5;
+
+        $query = $this->_pdo->prepare("SELECT * FROM pictures ORDER BY timedate DESC LIMIT :limit OFFSET :offset");
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
         $query->execute();
         $this->_pictures = $query->fetchAll();
         return $this->_pictures;
@@ -38,8 +49,8 @@ class Picture {
                         <div class="profile-picture">
                         </div>
                         <p class="username">Username</p>
-                        <div class="picture neon-div-border">
-                            <img src="'.$picture['directory'].'" class="picture">
+                        <div class="picture neon-div-border">s
+                            <img src="/'.$picture['directory'].'" class="picture">
                         </div>
                         <div style="margin-top: 10px">
                         <div class="button-list">

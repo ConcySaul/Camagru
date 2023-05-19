@@ -25,7 +25,8 @@ class Login {
         }
         else {
             $user->login();
-            header('Location: /Home');
+            $url = "/Home/1";
+            header('Location: ' .$url);
         }
     }
 }

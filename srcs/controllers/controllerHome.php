@@ -13,8 +13,11 @@ class Home {
         else {
             $_SESSION['msg'] = 'Welcome '.$_SESSION['username'];
             $pic = new Picture();
-            
-            $pictures = $pic->getPictures();
+            $page = $url[1] - 1;
+            $offset = $page * 5;
+            $pictures = $pic->getPictures(intval($offset));
+            // var_dump($offset);
+            // var_dump($pictures);
             require_once('views/home.php');
         }
     }

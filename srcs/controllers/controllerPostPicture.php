@@ -22,9 +22,12 @@ class PostPicture {
                 ));
                 return; 
             }
-            $query = $this->_pdo->prepare("INSERT into pictures (user_id, directory) VALUES (:user_id, :directory)");
+
+            $date = date('Y-m-d H:i:s');
+            $query = $this->_pdo->prepare("INSERT into pictures (user_id, directory, timedate) VALUES (:user_id, :directory, :timedate)");
             $query->bindParam(":user_id", $_SESSION['user_id']);
             $query->bindParam(":directory", $targetFile);
+            $query->bindParam(":timedate", $date);
             if ($query->execute()) {
                 http_response_code(201);
                 echo json_encode(array(

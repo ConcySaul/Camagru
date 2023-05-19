@@ -40,7 +40,8 @@ class Database {
             `directory` VARCHAR(32) NOT NULL,
             `caption` VARCHAR(250),
             `like` INT NOT NULL DEFAULT 0,
-            `comment` INT NOT NULL DEFAULT 0
+            `comment` INT NOT NULL DEFAULT 0,
+            `timedate` DATETIME NOT NULL
         );");
 	}
 
