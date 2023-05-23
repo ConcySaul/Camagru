@@ -25,7 +25,7 @@ class Picture {
     public function getAllPictures() {
         $query = $this->_pdo->prepare("SELECT * FROM pictures");
         $query->execute();
-        $this->_pictures = $query->fetchAll();
+        $this->count = $query->fetchAll();
         return $this->_pictures;
     }
 
@@ -40,6 +40,13 @@ class Picture {
         return $this->_pictures;
     }
 
+    public function countPictures() {
+        $query = $this->_pdo->prepare("SELECT COUNT(*) as counter FROM pictures");
+        $query->execute();
+        $count = $query->fetchColumn();
+        return $count;
+    }
+
     public function printPictures() {
         foreach ($this->_pictures as $picture) {
             echo '
@@ -49,7 +56,7 @@ class Picture {
                         <div class="profile-picture">
                         </div>
                         <p class="username">Username</p>
-                        <div class="picture neon-div-border">s
+                        <div class="picture neon-div-border">
                             <img src="/'.$picture['directory'].'" class="picture">
                         </div>
                         <div style="margin-top: 10px">

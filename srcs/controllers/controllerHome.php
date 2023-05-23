@@ -16,8 +16,7 @@ class Home {
             $page = $url[1] - 1;
             $offset = $page * 5;
             $pictures = $pic->getPictures(intval($offset));
-            // var_dump($offset);
-            // var_dump($pictures);
+            $count = $pic->countPictures();
             require_once('views/home.php');
         }
     }

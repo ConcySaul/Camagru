@@ -20,9 +20,9 @@
         ?>
         <div id="main-container" class="neon-border">
         <div class="pagination">
-          <a href="/Home">&laquo;</a>
-          <a href="#"><?php echo $url[1] ?></a>
-          <a href="#">&raquo;</a>
+          <a href="/Home/<?php echo $url[1] - 1 ?>" <?php echo ($url[1] == 1) ? 'onclick="return false;"' : ''; ?> >&laquo;</a>
+          <a href="#" onclick="return false;"><?php echo $url[1] ?></a>
+          <a href="/Home/<?php echo $url[1] + 1 ?>" <?php echo ($count < $url[1] * 5) ? 'onclick="return false;"' : ''; ?> >&raquo;</a>
       </div>
             <?php
               $pic->printPictures();
