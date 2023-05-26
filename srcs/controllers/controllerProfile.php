@@ -1,5 +1,6 @@
 <?php
 require_once ('models/userModel.php');
+require_once ('models/pictureModel.php');
 
 class Profile {
     private $_username;
@@ -11,6 +12,7 @@ class Profile {
             require_once('views/index.php');
         }
         else {
+            $picture = new Picture();
             require_once('views/profile.php');
         }
     }

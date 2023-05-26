@@ -43,6 +43,13 @@ class Database {
             `comment` INT NOT NULL DEFAULT 0,
             `timedate` DATETIME NOT NULL
         );");
+
+
+        $this->_pdo->query("CREATE TABLE IF NOT EXISTS likes (
+            `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            `id_user` INT NOT NULL,
+            `id_pic` INT NOT NULL
+        );");
 	}
 
     public function createUser($username, $email, $password) {

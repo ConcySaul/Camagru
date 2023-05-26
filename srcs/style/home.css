@@ -76,34 +76,38 @@ body {
 .customSvg {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .counters {
   margin-top: 4px
 }
 
+
 /* Pagination links */
 
 .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
   margin-left: auto;
   margin-right: auto;
 }
 
+.picture-element .username {
+  text-decoration: none !important;
+}
+
 .pagination a {
-  color: black;
+  color: #F7669D;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   transition: background-color .3s;
 }
 
-.pagination a.active {
-  background-color: dodgerblue;
-  color: white;
-}
 
-/* Add a grey background color on mouse-over */
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {background-color: #6b1177;}
 
 /* like button */
 

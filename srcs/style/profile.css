@@ -80,11 +80,13 @@ form {
 }
 
 #picture-div {
+    display: flex;
     height: 400px;
     width: 600px;
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
 }
 
 #file {
@@ -111,3 +113,134 @@ label {
 label:hover {
     background-color: #361B4E;
 }
+
+.image-container {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-container {
+    flex: 0;
+    display: flex;
+    flex-direction: row; /* Change la direction en "row" */
+    align-items: center; /* Aligne les éléments au centre horizontalement */
+    margin-top: 10px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    transform: rotate(90deg);
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #F68BC6;
+    border: none;
+    border-radius: 3px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #361B4E;
+    margin-top: -5px;
+  }
+
+  input[type="range"]::-webkit-range-progress {
+    height: 5px;
+    background: #361B4E;/* Couleur de la partie sélectionnée */
+    border: none;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    background: #F68BC6;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #361B4E;
+    position: relative;
+    z-index: 1;
+  }
+  
+  input[type="range"]::-moz-range-progress {
+    height: 5px;
+    background: #361B4E; /* Couleur de la partie sélectionnée */
+    border: none;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .sticker-slide {
+
+    margin-top: 30px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	color: #361B4E;
+	background-color: #160821;
+	border: 2px solid black;
+	border-radius: 7px;
+
+	width: 800px;
+
+	overflow: scroll;
+    overflow-y: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.sticker-slide img {
+	cursor: pointer;
+
+	object-fit: scale-down;
+
+	border-top: 0.5px solid transparent;
+	border-bottom: 0.5px solid transparent;
+	background-color: transparent;
+	transition: 0.3s;
+	width: 100%;
+	height: auto;
+	max-height: 100px;
+}
+
+.sticker-slide img:hover {
+	border-color: #361B4E;
+	background-color: #361B4E;
+}
+
+.sticker-slide::-webkit-scrollbar {
+    height: 10px; /* Ajustez la hauteur selon vos besoins */
+  }
+
+  /* Styles pour la poignée de la barre de défilement */
+  .sticker-slide::-webkit-scrollbar-thumb {
+    background-color: #361B4E; /* Couleur de la barre de défilement horizontale */
+  }

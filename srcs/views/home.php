@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/style/home.css">
     <link rel="stylesheet" type="text/css" href="/style/header.css">
     <link rel="stylesheet" type="text/css" href="/style/utils.css">
-    <script type="text/javascript" src="script/home.js"></script>
+    <script type="text/javascript" src="/script/home.js"></script>
   </head>
   <body>
         <?php

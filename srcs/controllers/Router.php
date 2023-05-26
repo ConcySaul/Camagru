@@ -37,6 +37,10 @@ class Router
                     $image = $_FILES['image'];
                     $this->_controller = new PostPicture($image);
                 }
+                else if ($_SERVER['REQUEST_URI'] === '/likePicture'){
+                    require_once ('controllers/controllerLikePicture.php');
+                    $this->_controller = new LikePicture($_POST);
+                }
             }
             //if the request is a GET
             else if ($_SERVER['REQUEST_METHOD'] === 'GET') {

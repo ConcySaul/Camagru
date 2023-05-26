@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="height=device-height, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style/profile.css">
-    <link rel="stylesheet" type="text/css" href="style/header.css">
-    <link rel="stylesheet" type="text/css" href="style/utils.css">
-    <script src="script/profile.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style/profile.css">
+    <link rel="stylesheet" type="text/css" href="/style/header.css">
+    <link rel="stylesheet" type="text/css" href="/style/utils.css">
+    <script src="/script/profile.js"></script>
   </head>
   <body>
         <?php
@@ -37,9 +37,20 @@
                 </form>
             </div>
             <div class="neon-div-border" id="picture-div">
-                <img src="" width="600" height="400" id="preview">
+                <div class="image-container">
+                    <img src="" width="600" height="400" id="preview">
+                </div>
+                <div class="input-container">
+                    <input type="range" id="yRange" min="0" max="400">
+                    <input type="range" id="xRange" min="0" max="600">
+                </div>
                 <!-- <video id="video" width="640" height="480" autoplay></video> -->
             </div>
+            
+			<div class="sticker-slide" id="sticker_slide">
+                <?php $picture->printStickers() ?>
+			</div>
+
             <input type="button" value="Add" id="addButton" hidden="true" onClick="postPicture()">
             <input type="file" name="file" id="file" class="inputfile" />
             <br>
