@@ -38,11 +38,11 @@
             </div>
             <div class="neon-div-border" id="picture-div">
                 <div class="image-container">
+                    <img id="sticker" style="z-index: 20;" src="" />
                     <img src="" width="600" height="400" id="preview">
                 </div>
                 <div class="input-container">
-                    <input type="range" id="yRange" min="0" max="400">
-                    <input type="range" id="xRange" min="0" max="600">
+                    <input type="range" min="600" max="2400" value="1200" class="resize-range">
                 </div>
                 <!-- <video id="video" width="640" height="480" autoplay></video> -->
             </div>

@@ -2,14 +2,13 @@ version: '3'
 
 services:
   apache:
-    build: ./config
+    build: .
     depends_on:
       - database
     ports:
       - "3001:80"
-      - "443:443"
-    volumes:
-      - ./srcs:/var/www/html/
+    # volumes:
+    #   - ./srcs:/var/www/html/
     environment:
       - MYSQL_HOST=database
       - MYSQL_DATABASE=camagru_database

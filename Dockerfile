@@ -1,20 +1,18 @@
 FROM php:7.4-apache 
 
 # SSL
+ADD --chown=www-data:www-data srcs /var/www/html/
 
 RUN a2enmod ssl
 RUN apt-get update && \
     apt-get install -y openssl libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 777 /var/www/html
-
 RUN a2enmod rewrite
 
 RUN openssl req -new -newkey rsa:2048 -nodes -keyout /etc/ssl/private/apache-selfsigned.key -x509 -days 365 -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=localhost"
 
-COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY /config/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 RUN a2ensite default-ssl.conf
 
 RUN docker-php-ext-install pdo_mysql

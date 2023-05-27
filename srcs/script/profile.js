@@ -65,3 +65,24 @@ function modifyUser() {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const scaleInput = document.querySelector(".resize-range");
+    scaleInput.addEventListener('input', () => {
+        document.getElementById('sticker').style.height = (scaleInput.value / 100) + "%";
+    });
+});
+
+function addSticker(path) {
+    var draggable = document.getElementById('sticker');
+    draggable.style.height = "15%";
+    draggable.style.position = "absolute";
+    draggable.style.top = "40%";
+    draggable.style.left = "40%";
+    draggable.src = path;
+
+    // if (video.srcObject || document.getElementById("photo").src !== window.location.href)
+    //     document.getElementById("takepic-btn").style.display = "flex";
+    const resize = document.querySelector(".resize-range")
+    resize.value = 1500;
+}
