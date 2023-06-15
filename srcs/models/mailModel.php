@@ -49,4 +49,28 @@
             ";
             $this->_mail->send();
         }
+
+        public function sendPasswordMail($challengeId) {
+            $this->_mail->Subject = "Password Reset";
+            $this->_mail->Body =
+            "
+            <html>
+                <head>
+                    <title>Change your password!</title>
+                </head>
+                <body style='
+                font-family: 'Designer', sans-serif;
+                font-size: 14px;
+                background-color: rgb(0, 0, 0);
+                '>
+                    <h1>Hi there !</h1>
+                    <br>
+                    <p>Looks like you try to change your password.</p>
+                    <br>
+                    <p>You can change it by clicking this <a href='http://localhost:3001/resetPassword/".$challengeId."'>LINK</a></p>
+                </body>
+            </html>
+            ";
+            $this->_mail->send();
+        }
     }

@@ -75,6 +75,14 @@ class Database {
         return ($result);
     }
 
+    public function getUserById($id) {
+        $query = $this->_pdo->prepare("SELECT * FROM users WHERE id = :id");                     
+        $query->bindParam(":id", $id);
+        $query->execute();
+        $result = $query->fetch();
+        return ($result);
+    }
+
     public function getUserByEmail($email) {
         $query = $this->_pdo->prepare("SELECT * FROM users WHERE email = :email");                     
         $query->bindParam(":email", $email);
@@ -106,6 +114,29 @@ class Database {
             var_dump ($error);
         }          
     }
+
+
+    public function changePassword($id, $password) {
+        $query = $this->_pdo->prepare("UPDATE users SET pass = :pass WHERE id = :id");
+        $query->bindParam(":id", $id);
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $query->bindParam(":pass", $hash);
+        if (!$query->execute()) {
+            $error = $query->errorInfo();
+            var_dump ($error);
+        }          
+    }
+
+    public function generateChallengeId($id) {
+        $challengeId = uniqid();
+        $query = $this->_pdo->prepare("UPDATE users SET challengeId = :challengeId WHERE id = :id");
+        $query->bindParam(":id", $id);
+        $query->bindParam(":challengeId", $challengeId);
+        $query->execute();
+        return $challengeId;
+    }
+
 
     public function changeEmail($id, $email) {
         $query = $this->_pdo->prepare("UPDATE users SET email = :email WHERE id = :id");

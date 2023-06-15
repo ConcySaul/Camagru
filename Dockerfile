@@ -21,3 +21,9 @@ RUN curl -o /tmp/PHPMailer.tar.gz -SL https://github.com/PHPMailer/PHPMailer/arc
     && tar -xzf /tmp/PHPMailer.tar.gz -C /tmp \
     && mv /tmp/PHPMailer-6.5.1 /usr/local/lib/phpmailer \
     && rm /tmp/PHPMailer.tar.gz
+
+RUN apt-get update && apt-get install -y libpng-dev \
+					libjpeg-dev libfreetype6-dev \
+					&& docker-php-ext-configure gd \
+					--with-freetype --with-jpeg \
+					&& docker-php-ext-install -j$(nproc) gd

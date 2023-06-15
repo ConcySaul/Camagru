@@ -1,3 +1,5 @@
+var stickerPath;
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("input[type=file]").addEventListener('change', (event) => {
         var button = document.getElementById("addButton");
@@ -22,9 +24,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function postPicture() {
     var file = document.getElementById("file").files;
+    var draggable = document.getElementById('sticker');
     var formData = new FormData();
+    const stickerData = {
+        top: draggable.style.top,
+		left: draggable.style.left,
+		height: draggable.style.height,
+		src: stickerPath
+	};
 
     formData.append("image", file[0]);
+    formData.append("stickerData", JSON.stringify(stickerData));
     fetch("http://localhost:3001/postPicture", {
         method: "POST",
         body: formData
@@ -66,6 +76,21 @@ function modifyUser() {
     }
 }
 
+function changePassword() {
+
+    fetch("http://localhost:3001/changePassword", {
+        method: "POST",
+    })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log(error);
+        return;
+    })
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const scaleInput = document.querySelector(".resize-range");
     scaleInput.addEventListener('input', () => {
@@ -80,6 +105,7 @@ function addSticker(path) {
     draggable.style.top = "40%";
     draggable.style.left = "40%";
     draggable.src = path;
+    stickerPath = path;
 
     // if (video.srcObject || document.getElementById("photo").src !== window.location.href)
     //     document.getElementById("takepic-btn").style.display = "flex";

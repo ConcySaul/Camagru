@@ -35,6 +35,9 @@
                     >
                     <input class="input neon-div-border" type="button" value="Save" onClick="modifyUser()">
                 </form>
+                <form id="changePassword" action="changePassword" method="post">
+                        <input id="submit" class="input" type="submit" value="Change password">
+                </form>
             </div>
             <div class="neon-div-border" id="picture-div">
                 <div class="image-container">

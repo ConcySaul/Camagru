@@ -35,11 +35,15 @@ class Router
                 else if ($_SERVER['REQUEST_URI'] === '/postPicture'){
                     require_once ('controllers/controllerPostPicture.php');
                     $image = $_FILES['image'];
-                    $this->_controller = new PostPicture($image);
+                    $this->_controller = new PostPicture($image, $_POST);
                 }
                 else if ($_SERVER['REQUEST_URI'] === '/likePicture'){
                     require_once ('controllers/controllerLikePicture.php');
                     $this->_controller = new LikePicture($_POST);
+                }
+                else if ($_SERVER['REQUEST_URI'] === '/confirmPassword'){
+                    require_once ('controllers/controllerConfirmPassword.php');
+                    $this->_controller = new ConfirmPassword($_POST);
                 }
             }
             //if the request is a GET
@@ -61,7 +65,7 @@ class Router
                     }
                 //if not...
                     else {
-                        // echo ('failure');
+                        echo ($ctrl);
                         require_once ('controllers/controllerIndex.php');
                         $this->_controller = new Index($url);
                     }

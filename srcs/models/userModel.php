@@ -36,9 +36,12 @@ class User {
     }
 
     public function __construct3($id) {
-        $this->getUserId($id);
+        $db = new Database();
+        $user = $db->getUserById($id);
+        $this->_id = $user['id'];
         $this->_password = $user['pass'];
         $this->_username = $user['username'];
+        $this->_email = $user['email'];
     }
 
     public function checkUsername () {
@@ -64,6 +67,13 @@ class User {
         $challengeId = $_db->createUser($this->_username, $this->_email, $this->_password);
         $mail = new Mail($this->_email, $this->_username);
         $mail->sendSignUpEmail($challengeId);
+    }
+
+    public function resetPassword(){
+        $db = new Database();
+        $challengeId = $db->generateChallengeId($this->_id);
+        $mail = new Mail($this->_email, $this->_username);
+        $mail->sendPasswordMail($challengeId);
     }
 
     public function login(){
@@ -112,6 +122,7 @@ class User {
             $_db->changeUsername($id, $username);
         }
     }
+
     // public function printInfo(){
     //     echo($this->_username);
     //     echo($this->_email);
