@@ -1,6 +1,16 @@
 var stickerPath;
 
 document.addEventListener("DOMContentLoaded", function() {
+    const video = document.getElementById('videoElement');
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        video.srcObject = stream;
+    })
+    .catch(error => {
+         console.log(error);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("input[type=file]").addEventListener('change', (event) => {
         var button = document.getElementById("addButton");
         const fileReader = new FileReader();
@@ -46,6 +56,27 @@ function postPicture() {
         console.log(error);
         return;
     })
+}
+
+navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+	video.srcObject = stream;
+})
+.catch(error => {
+	 console.log(error);
+});
+
+function useCamera() {
+    const video = document.getElementById('videoElement');
+    const preview = document.getElementById("preview");
+
+    preview.src = "";
+
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    var dataURL = canvas.toDataURL('image/png');
 }
 
 function modifyUser() {

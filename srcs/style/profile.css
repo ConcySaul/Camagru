@@ -80,13 +80,15 @@ form {
 }
 
 #picture-div {
-    display: flex;
-    height: 400px;
-    width: 600px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 700px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #file {
@@ -115,16 +117,31 @@ label:hover {
 }
 
 .image-container {
-    flex: 1;
-    margin-right: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#videoElement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .input-container {
-    flex: 0;
-    display: flex;
-    flex-direction: row; /* Change la direction en "row" */
-    align-items: center; /* Aligne les éléments au centre horizontalement */
-    margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
 input[type=range] {
