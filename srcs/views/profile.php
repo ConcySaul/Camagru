@@ -41,12 +41,16 @@
             </div>
             <div id="picture-div">
                 <div class="image-container neon-div-border">
-                    <img id="sticker" style="z-index: 20;" src="" />
+                    <img id="sticker1" style="z-index: 20;" src="" />
+                    <img id="sticker2" style="z-index: 20;" src="" />
+                    <img id="sticker3" style="z-index: 20;" src="" />
                     <video id="videoElement" width="600" height="400" autoplay></video>
                     <img src="" width="600" height="400" id="preview">
                 </div>
                 <div class="input-container">
-                    <input type="range" min="600" max="2400" value="1200" class="resize-range">
+                    <input type="range" min="600" max="2400" value="1200" class="resize-range" id="resize_1">
+                    <input type="range" min="600" max="2400" value="1200" class="resize-range" id="resize_2">
+                    <input type="range" min="600" max="2400" value="1200" class="resize-range" id="resize_3">
                 </div>
             </div>
             

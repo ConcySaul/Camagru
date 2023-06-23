@@ -34,8 +34,7 @@ class Router
                 }
                 else if ($_SERVER['REQUEST_URI'] === '/postPicture'){
                     require_once ('controllers/controllerPostPicture.php');
-                    $image = $_FILES['image'];
-                    $this->_controller = new PostPicture($image, $_POST);
+                    $this->_controller = new PostPicture($_POST);
                 }
                 else if ($_SERVER['REQUEST_URI'] === '/likePicture'){
                     require_once ('controllers/controllerLikePicture.php');

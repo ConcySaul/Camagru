@@ -6,7 +6,7 @@ class PostPicture {
     private $_email;
     private $_pdo;
 
-    public function __construct($image, $post) {
+    public function __construct($post) {
         $this->_pdo = $this->connectDb(); 
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['msg'] = 'You are not connected';
@@ -14,23 +14,20 @@ class PostPicture {
         }
         else {
             $stickerData = json_decode($post['stickerData'], true);
+            $stickerData2 = json_decode($post['stickerData2'], true);
+            $stickerData3 = json_decode($post['stickerData3'], true);
 
-            $targetDir = 'public/';
-            $targetFile = $targetDir.uniqid().'.'.pathinfo($image['name'], PATHINFO_EXTENSION);
-            if (!move_uploaded_file($image['tmp_name'], $targetFile)) {
-                http_response_code(500);
-                echo json_encode(array(
-                    'message' => 'failure'
-                ));
-                return; 
-            }
             
-            $tmp_filename = $this->create_image($targetFile, $stickerData);
+            $filename = $this->create_image(base64_decode(str_replace('data:'. $_POST['imageType'] .';base64,', '', $_POST['imageData'])),
+            $stickerData, $stickerData2, $stickerData3);
+
+            rename($filename, "public/".$filename);
             
+            $directory = "public/" . $filename;
             $date = date('Y-m-d H:i:s');
             $query = $this->_pdo->prepare("INSERT into pictures (user_id, directory, timedate) VALUES (:user_id, :directory, :timedate)");
             $query->bindParam(":user_id", $_SESSION['user_id']);
-            $query->bindParam(":directory", $targetFile);
+            $query->bindParam(":directory", $directory);
             $query->bindParam(":timedate", $date);
             if ($query->execute()) {
                 http_response_code(201);
@@ -41,35 +38,36 @@ class PostPicture {
             else {
                 http_response_code(500);
                 echo json_encode(array(
-                    'message' => 'failure'
+                    'message' => 'failure with db'
                 ));
                 exit();
             }
         }
     }
 
-    private function create_image($imageUrl, $stickerData) {
+    private function create_image($imageUrl, $stickerData, $stickerData2, $stickerData3) {
 
-        $image = imagecreatefrompng($imageUrl);
-        $overlayImg = imagecreatefrompng(ltrim($stickerData['src'], $stickerData['src'][0]));
-
+        $image = imagecreatefromstring($imageUrl);
+        if (isset($stickerData['src'])){
+            $overlayImg = imagecreatefrompng(ltrim($stickerData['src'], $stickerData['src'][0]));
+            
+            $overlayHeight = (substr($stickerData['height'], 0, -1) / 100) * imagesy($image);
+            $overlayWidth = $overlayHeight * (imagesx($overlayImg) / imagesy($overlayImg));
+            $overlayResized = imagecreatetruecolor($overlayWidth, $overlayHeight);
+            imagealphablending($overlayResized, false);
+            imagesavealpha($overlayResized, true);
         
-        $overlayHeight = (substr($stickerData['height'], 0, -1) / 100) * imagesy($image);
-        $overlayWidth = $overlayHeight * (imagesx($overlayImg) / imagesy($overlayImg));
-        $overlayResized = imagecreatetruecolor($overlayWidth, $overlayHeight);
-        imagealphablending($overlayResized, false);
-        imagesavealpha($overlayResized, true);
+            $overlayResizedLeft = (substr($stickerData['left'], 0, -1) / 100) * imagesx($image);
+            $overlayResizedTop = (substr($stickerData['top'], 0, -1) / 100) * imagesy($image);
+        
+            imagecopyresampled($overlayResized, $overlayImg, 0, 0, 0, 0, $overlayWidth, $overlayHeight, imagesx($overlayImg), imagesy($overlayImg));
+        
+            imagecopy($image, $overlayResized, $overlayResizedLeft, $overlayResizedTop, 0, 0, $overlayWidth, $overlayHeight);
+        }
+        
+        $tmp_filename = uniqid() . '.png';
     
-        $overlayResizedLeft = (substr($stickerData['left'], 0, -1) / 100) * imagesx($image);
-        $overlayResizedTop = (substr($stickerData['top'], 0, -1) / 100) * imagesy($image);
-    
-        imagecopyresampled($overlayResized, $overlayImg, 0, 0, 0, 0, $overlayWidth, $overlayHeight, imagesx($overlayImg), imagesy($overlayImg));
-    
-        imagealphablending($image, true);
-        imagesavealpha($image, true);
-        imagecopy($image, $overlayResized, $overlayResizedLeft, $overlayResizedTop, 0, 0, $overlayWidth, $overlayHeight);
-    
-        imagepng($image, $imageUrl);
+        imagepng($image, $tmp_filename);
     
         return $tmp_filename;
     }
